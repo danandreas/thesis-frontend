@@ -79,7 +79,7 @@ export default function LoginPage() {
               borderRadius: '10px', padding: '0.875rem 1rem', marginBottom: '1.25rem',
               color: '#fca5a5', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
             }}>
-              <i className="lni lni-warning" /> {error}
+              <i className="lni lni-info" /> {error}
             </div>
           )}
 
@@ -88,7 +88,7 @@ export default function LoginPage() {
               Email
             </label>
             <div style={{ position: 'relative' }}>
-              <i className="lni lni-envelope" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
+              <i className="lni lni-envelope-1" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
               <input
                 type="email"
                 value={email}
@@ -115,7 +115,7 @@ export default function LoginPage() {
               Password
             </label>
             <div style={{ position: 'relative' }}>
-              <i className="lni lni-lock-alt" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
+              <i className="lni lni-locked-1" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
               <input
                 type={showPass ? 'text' : 'password'}
                 value={password}
@@ -154,7 +154,7 @@ export default function LoginPage() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
           }}>
             {loading ? (
-              <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Memproses...</>
+              <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Memproses...</>
             ) : (
               <><i className="lni lni-enter" /> Masuk</>
             )}

@@ -53,12 +53,12 @@ export default function DashboardPage() {
   }, [admin]);
 
   const statCards = summary ? [
-    { label: 'Total Rekrutmen', value: summary.total_recruitments, icon: 'lni-briefcase', color: '#25343F' },
+    { label: 'Total Rekrutmen', value: summary.total_recruitments, icon: 'lni-briefcase-1', color: '#25343F' },
     { label: 'Rekrutmen Aktif', value: summary.active_recruitments, icon: 'lni-play', color: '#10b981' },
-    { label: 'Total Pelamar', value: summary.total_applications, icon: 'lni-users', color: '#3b82f6' },
+    { label: 'Total Pelamar', value: summary.total_applications, icon: 'lni-user-multiple-4', color: '#3b82f6' },
     { label: 'Menunggu Review', value: summary.submitted, icon: 'lni-hourglass', color: '#FF9B51' },
-    { label: 'Diterima', value: summary.accepted, icon: 'lni-checkmark-circle', color: '#10b981' },
-    { label: 'Ditolak', value: summary.rejected, icon: 'lni-close', color: '#ef4444' },
+    { label: 'Diterima', value: summary.accepted, icon: 'lni-check-circle-1', color: '#10b981' },
+    { label: 'Ditolak', value: summary.rejected, icon: 'lni-xmark-circle', color: '#ef4444' },
   ] : [];
 
   return (
@@ -114,14 +114,14 @@ export default function DashboardPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', overflow: 'hidden' }}>
             <div style={{ padding: '1.25rem 1.5rem', borderBottom: `1px solid ${border}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 style={{ fontWeight: 700, fontSize: '1rem', color: textMain }}>
-                <i className="lni lni-briefcase" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
+                <i className="lni lni-briefcase-1" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
                 Rekrutmen Aktif
               </h2>
               <a href="/dashboard/recruitment" style={{ color: '#FF9B51', fontSize: '0.8rem', fontWeight: 600, textDecoration: 'none' }}>Lihat Semua →</a>
             </div>
             {activeRecs.length === 0 ? (
               <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-                <i className="lni lni-briefcase" style={{ fontSize: '2rem', marginBottom: '0.75rem', display: 'block' }} />
+                <i className="lni lni-briefcase-1" style={{ fontSize: '2rem', marginBottom: '0.75rem', display: 'block' }} />
                 Belum ada rekrutmen aktif.
               </div>
             ) : (
@@ -152,7 +152,7 @@ export default function DashboardPage() {
                               background: pos.ranked ? 'rgba(16,185,129,0.12)' : 'rgba(100,116,139,0.1)',
                               color: pos.ranked ? '#10b981' : textMut,
                             }}>
-                              <i className={pos.ranked ? 'lni lni-checkmark' : 'lni lni-hourglass'} />
+                              <i className={pos.ranked ? 'lni lni-check' : 'lni lni-hourglass'} />
                               {pos.ranked ? 'Sudah Di-generate' : 'Belum Di-generate'}
                             </span>
                           </td>
@@ -171,9 +171,9 @@ export default function DashboardPage() {
       {!admin && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
           {[
-            { href: '/dashboard/recruitments', icon: 'lni-briefcase', title: 'Rekrutmen Aktif', desc: 'Lihat posisi yang tersedia dan daftar', color: '#25343F' },
-            { href: '/dashboard/my-applications', icon: 'lni-files', title: 'Lamaran Saya', desc: 'Pantau status lamaran yang sudah kamu kirim', color: '#3b82f6' },
-            { href: '/dashboard/profile', icon: 'lni-user', title: 'Profil Saya', desc: 'Lengkapi data profil dan riwayat pendidikan', color: '#FF9B51' },
+            { href: '/dashboard/recruitments', icon: 'lni-briefcase-1', title: 'Rekrutmen Aktif', desc: 'Lihat posisi yang tersedia dan daftar', color: '#25343F' },
+            { href: '/dashboard/my-applications', icon: 'lni-file-multiple', title: 'Lamaran Saya', desc: 'Pantau status lamaran yang sudah kamu kirim', color: '#3b82f6' },
+            { href: '/dashboard/profile', icon: 'lni-user-4', title: 'Profil Saya', desc: 'Lengkapi data profil dan riwayat pendidikan', color: '#FF9B51' },
           ].map((c, i) => (
             <a key={i} href={c.href} style={{
               background: surface, border: `1px solid ${border}`, borderRadius: '16px',

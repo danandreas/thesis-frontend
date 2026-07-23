@@ -202,7 +202,7 @@ export default function UsersPage() {
       <div style={{ marginBottom: "1rem" }}>
         <div style={{ position: "relative", maxWidth: "360px" }}>
           <i
-            className="lni lni-search-alt"
+            className="lni lni-search-1"
             style={{
               position: "absolute",
               left: "0.875rem",
@@ -233,7 +233,7 @@ export default function UsersPage() {
         {loading ? (
           <div style={{ padding: "3rem", textAlign: "center", color: textMut }}>
             <i
-              className="lni lni-spinner"
+              className="lni lni-spinner-3"
               style={{
                 fontSize: "2rem",
                 animation: "spin 1s linear infinite",
@@ -364,8 +364,8 @@ export default function UsersPage() {
                         <i
                           className={
                             u.role.code === "admin"
-                              ? "lni lni-shield"
-                              : "lni lni-user"
+                              ? "lni lni-shield-2"
+                              : "lni lni-user-4"
                           }
                         />
                         {u.role.name}
@@ -419,7 +419,7 @@ export default function UsersPage() {
                             fontFamily: "'Montserrat', sans-serif",
                           }}
                         >
-                          <i className="lni lni-trash-can" />
+                          <i className="lni lni-trash-3" />
                         </button>
                       </div>
                     </td>
@@ -500,7 +500,7 @@ export default function UsersPage() {
                   fontSize: "1.25rem",
                 }}
               >
-                <i className="lni lni-close" />
+                <i className="lni lni-xmark-circle" />
               </button>
             </div>
             {error && (
@@ -518,7 +518,7 @@ export default function UsersPage() {
                   gap: "0.5rem",
                 }}
               >
-                <i className="lni lni-warning" /> {error}
+                <i className="lni lni-info" /> {error}
               </div>
             )}
             <form onSubmit={handleSave}>
@@ -652,14 +652,14 @@ export default function UsersPage() {
                     {saving ? (
                       <>
                         <i
-                          className="lni lni-spinner"
+                          className="lni lni-spinner-3"
                           style={{ animation: "spin 1s linear infinite" }}
                         />{" "}
                         Menyimpan...
                       </>
                     ) : (
                       <>
-                        <i className="lni lni-save" /> Simpan
+                        <i className="lni lni-floppy-disk-1" /> Simpan
                       </>
                     )}
                   </button>

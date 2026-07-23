@@ -13,7 +13,7 @@ export function LoadingSpinner({ size = '2rem', message = 'Memuat...' }: { size?
   const { isDark } = useTheme();
   return (
     <div style={{ padding: '3rem', textAlign: 'center', color: isDark ? '#8BA3B5' : '#64748B' }}>
-      <i className="lni lni-spinner" style={{ fontSize: size, animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
+      <i className="lni lni-spinner-3" style={{ fontSize: size, animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
       {message}
       <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
     </div>
@@ -21,7 +21,7 @@ export function LoadingSpinner({ size = '2rem', message = 'Memuat...' }: { size?
 }
 
 // ── Empty State ────────────────────────────────────────────────
-export function EmptyState({ icon = 'lni-inbox', title = 'Tidak ada data', desc = '', action }: { icon?: string; title?: string; desc?: string; action?: React.ReactNode }) {
+export function EmptyState({ icon = 'lni-folder-1', title = 'Tidak ada data', desc = '', action }: { icon?: string; title?: string; desc?: string; action?: React.ReactNode }) {
   const { isDark } = useTheme();
   return (
     <div style={{ padding: '3rem', textAlign: 'center', color: isDark ? '#8BA3B5' : '#64748B' }}>
@@ -36,10 +36,10 @@ export function EmptyState({ icon = 'lni-inbox', title = 'Tidak ada data', desc 
 // ── Alert ──────────────────────────────────────────────────────
 type AlertType = 'success' | 'error' | 'warning' | 'info';
 const alertConfig: Record<AlertType, { bg: string; border: string; color: string; icon: string }> = {
-  success: { bg: 'rgba(16,185,129,0.1)',  border: 'rgba(16,185,129,0.2)',  color: '#10b981', icon: 'lni-checkmark-circle' },
-  error:   { bg: 'rgba(239,68,68,0.1)',   border: 'rgba(239,68,68,0.2)',   color: '#ef4444', icon: 'lni-warning' },
-  warning: { bg: 'rgba(255,155,81,0.1)',  border: 'rgba(255,155,81,0.2)',  color: '#FF9B51', icon: 'lni-information' },
-  info:    { bg: 'rgba(59,130,246,0.1)',  border: 'rgba(59,130,246,0.2)',  color: '#3b82f6', icon: 'lni-information' },
+  success: { bg: 'rgba(16,185,129,0.1)',  border: 'rgba(16,185,129,0.2)',  color: '#10b981', icon: 'lni-check-circle-1' },
+  error:   { bg: 'rgba(239,68,68,0.1)',   border: 'rgba(239,68,68,0.2)',   color: '#ef4444', icon: 'lni-info' },
+  warning: { bg: 'rgba(255,155,81,0.1)',  border: 'rgba(255,155,81,0.2)',  color: '#FF9B51', icon: 'lni-info' },
+  info:    { bg: 'rgba(59,130,246,0.1)',  border: 'rgba(59,130,246,0.2)',  color: '#3b82f6', icon: 'lni-info' },
 };
 
 export function Alert({ type = 'info', children }: { type?: AlertType; children: React.ReactNode }) {

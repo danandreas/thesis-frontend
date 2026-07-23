@@ -35,8 +35,8 @@ export default function ResultPage() {
   }, [appId]);
 
   const statusConfig = {
-    accepted: { icon: 'lni-checkmark-circle', color: '#10b981', bg: 'rgba(16,185,129,0.1)', label: 'Selamat! Anda Diterima 🎉' },
-    rejected: { icon: 'lni-close', color: '#ef4444', bg: 'rgba(239,68,68,0.1)', label: 'Mohon Maaf, Tidak Lolos' },
+    accepted: { icon: 'lni-check-circle-1', color: '#10b981', bg: 'rgba(16,185,129,0.1)', label: 'Selamat! Anda Diterima 🎉' },
+    rejected: { icon: 'lni-xmark-circle', color: '#ef4444', bg: 'rgba(239,68,68,0.1)', label: 'Mohon Maaf, Tidak Lolos' },
     pending:  { icon: 'lni-hourglass', color: '#FF9B51', bg: 'rgba(255,155,81,0.1)', label: 'Menunggu Keputusan Final' },
   };
 
@@ -49,7 +49,7 @@ export default function ResultPage() {
 
       {loading ? (
         <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat hasil...
+          <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat hasil...
         </div>
       ) : error ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center' }}>
@@ -77,7 +77,7 @@ export default function ResultPage() {
                   </div>
                   <div style={{ background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFC', borderRadius: '12px', padding: '1rem' }}>
                     <div style={{ fontSize: '2rem', fontWeight: 900, color: result.is_recommended ? '#10b981' : '#ef4444' }}>
-                      <i className={`lni ${result.is_recommended ? 'lni-checkmark-circle' : 'lni-close'}`} />
+                      <i className={`lni ${result.is_recommended ? 'lni-check-circle-1' : 'lni-xmark-circle'}`} />
                     </div>
                     <div style={{ fontSize: '0.75rem', color: textMut, fontWeight: 600, textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>Rekomendasi</div>
                   </div>
@@ -85,7 +85,7 @@ export default function ResultPage() {
 
                 {result.final_status === 'pending' && (
                   <div style={{ background: 'rgba(255,155,81,0.08)', border: '1px solid rgba(255,155,81,0.2)', borderRadius: '10px', padding: '0.875rem', fontSize: '0.8rem', color: textMut, marginBottom: '1.5rem' }}>
-                    <i className="lni lni-information" style={{ color: '#FF9B51', marginRight: '0.375rem' }} />
+                    <i className="lni lni-info" style={{ color: '#FF9B51', marginRight: '0.375rem' }} />
                     Admin sedang meninjau hasil dan akan segera menetapkan keputusan final.
                   </div>
                 )}

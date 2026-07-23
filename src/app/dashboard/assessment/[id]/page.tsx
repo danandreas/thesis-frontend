@@ -63,7 +63,7 @@ export default function AssessmentPage() {
   if (loading) return (
     <DashboardLayout>
       <div style={{ padding: '3rem', textAlign: 'center', color: isDark ? '#8BA3B5' : '#64748B' }}>
-        <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
+        <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
         Memuat pertanyaan asesmen...
       </div>
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
@@ -92,7 +92,7 @@ export default function AssessmentPage() {
 
       {error && (
         <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '10px', padding: '0.875rem 1rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <i className="lni lni-warning" /> {error}
+          <i className="lni lni-info" /> {error}
         </div>
       )}
 
@@ -102,7 +102,7 @@ export default function AssessmentPage() {
           <div key={q.question_id} style={{ background: surface, border: `1.5px solid ${answers[q.question_id] ? '#FF9B51' : border}`, borderRadius: '16px', padding: '1.375rem 1.5rem', transition: 'border-color 0.2s' }}>
             <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1rem' }}>
               <div style={{ width: '28px', height: '28px', borderRadius: '8px', background: answers[q.question_id] ? '#FF9B51' : (isDark ? '#2A3A4A' : '#E2E8F0'), display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontWeight: 800, fontSize: '0.75rem', color: answers[q.question_id] ? 'white' : textMut, transition: 'all 0.2s' }}>
-                {answers[q.question_id] ? <i className="lni lni-checkmark" style={{ fontSize: '0.75rem' }} /> : idx + 1}
+                {answers[q.question_id] ? <i className="lni lni-check" style={{ fontSize: '0.75rem' }} /> : idx + 1}
               </div>
               <p style={{ color: textMain, fontWeight: 600, fontSize: '0.9375rem', lineHeight: 1.5 }}>{q.question_text}</p>
             </div>
@@ -134,8 +134,8 @@ export default function AssessmentPage() {
       <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
         <p style={{ fontSize: '0.875rem', color: textMut }}>
           {answeredCount < totalQ
-            ? <><i className="lni lni-warning" style={{ color: '#FF9B51', marginRight: '0.375rem' }} />{totalQ - answeredCount} pertanyaan belum dijawab</>
-            : <><i className="lni lni-checkmark-circle" style={{ color: '#10b981', marginRight: '0.375rem' }} />Semua pertanyaan sudah dijawab</>}
+            ? <><i className="lni lni-info" style={{ color: '#FF9B51', marginRight: '0.375rem' }} />{totalQ - answeredCount} pertanyaan belum dijawab</>
+            : <><i className="lni lni-check-circle-1" style={{ color: '#10b981', marginRight: '0.375rem' }} />Semua pertanyaan sudah dijawab</>}
         </p>
         <button onClick={handleSubmit} disabled={submitting || answeredCount < totalQ} style={{
           padding: '0.75rem 1.75rem', background: (submitting || answeredCount < totalQ) ? '#94a3b8' : '#FF9B51',
@@ -144,7 +144,7 @@ export default function AssessmentPage() {
           fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem',
           boxShadow: (submitting || answeredCount < totalQ) ? 'none' : '0 4px 16px rgba(255,155,81,0.4)',
         }}>
-          {submitting ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Mengirim...</> : <><i className="lni lni-send" /> Submit Asesmen</>}
+          {submitting ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Mengirim...</> : <><i className="lni lni-enter" /> Submit Asesmen</>}
         </button>
       </div>
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>

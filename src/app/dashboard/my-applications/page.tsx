@@ -29,13 +29,13 @@ export default function MyApplicationsPage() {
   }, []);
 
   const statusMap: Record<string, { label: string; color: string; bg: string; icon: string }> = {
-    registered:  { label: 'Terdaftar',        color: '#3b82f6', bg: 'rgba(59,130,246,0.12)',  icon: 'lni-user' },
-    in_progress: { label: 'Mengisi Asesmen',   color: '#FF9B51', bg: 'rgba(255,155,81,0.12)', icon: 'lni-pencil' },
-    submitted:   { label: 'Sudah Disubmit',    color: '#8b5cf6', bg: 'rgba(139,92,246,0.12)', icon: 'lni-checkmark' },
-    verified:    { label: 'Dokumen Diverifikasi', color: '#10b981', bg: 'rgba(16,185,129,0.12)', icon: 'lni-shield' },
-    scored:      { label: 'Sudah Dinilai',     color: '#FF9B51', bg: 'rgba(255,155,81,0.12)', icon: 'lni-bar-chart' },
-    accepted:    { label: 'Diterima ✓',        color: '#10b981', bg: 'rgba(16,185,129,0.12)', icon: 'lni-checkmark-circle' },
-    rejected:    { label: 'Tidak Lolos',        color: '#ef4444', bg: 'rgba(239,68,68,0.12)',  icon: 'lni-close' },
+    registered:  { label: 'Terdaftar',        color: '#3b82f6', bg: 'rgba(59,130,246,0.12)',  icon: 'lni-user-4' },
+    in_progress: { label: 'Mengisi Asesmen',   color: '#FF9B51', bg: 'rgba(255,155,81,0.12)', icon: 'lni-pencil-1' },
+    submitted:   { label: 'Sudah Disubmit',    color: '#8b5cf6', bg: 'rgba(139,92,246,0.12)', icon: 'lni-check' },
+    verified:    { label: 'Dokumen Diverifikasi', color: '#10b981', bg: 'rgba(16,185,129,0.12)', icon: 'lni-shield-2' },
+    scored:      { label: 'Sudah Dinilai',     color: '#FF9B51', bg: 'rgba(255,155,81,0.12)', icon: 'lni-bar-chart-4' },
+    accepted:    { label: 'Diterima ✓',        color: '#10b981', bg: 'rgba(16,185,129,0.12)', icon: 'lni-check-circle-1' },
+    rejected:    { label: 'Tidak Lolos',        color: '#ef4444', bg: 'rgba(239,68,68,0.12)',  icon: 'lni-xmark-circle' },
   };
 
   return (
@@ -47,11 +47,11 @@ export default function MyApplicationsPage() {
 
       {loading ? (
         <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
+          <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
         </div>
       ) : items.length === 0 ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-files" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
+          <i className="lni lni-file-multiple" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
           <p style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Belum ada lamaran.</p>
           <Link href="/dashboard/recruitments" style={{ color: '#FF9B51', fontWeight: 700, textDecoration: 'none', fontSize: '0.875rem' }}>
             Lihat Rekrutmen Aktif →
@@ -77,7 +77,7 @@ export default function MyApplicationsPage() {
                       </span>
                       {app.submitted_at && (
                         <span style={{ fontSize: '0.75rem', color: textMut }}>
-                          <i className="lni lni-calendar" style={{ marginRight: '0.25rem' }} />
+                          <i className="lni lni-calendar-days" style={{ marginRight: '0.25rem' }} />
                           {new Date(app.submitted_at).toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}
                         </span>
                       )}
@@ -90,12 +90,12 @@ export default function MyApplicationsPage() {
                 <div style={{ display: 'flex', gap: '0.625rem' }}>
                   {canFill && (
                     <Link href={`/dashboard/assessment/${app.id}`} style={{ padding: '0.5rem 1rem', background: '#FF9B51', border: 'none', borderRadius: '8px', color: 'white', fontWeight: 700, fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.375rem' }}>
-                      <i className="lni lni-pencil" /> {app.status === 'registered' ? 'Isi Asesmen' : 'Lanjutkan'}
+                      <i className="lni lni-pencil-1" /> {app.status === 'registered' ? 'Isi Asesmen' : 'Lanjutkan'}
                     </Link>
                   )}
                   {canSeeResult && (
                     <Link href={`/dashboard/result/${app.id}`} style={{ padding: '0.5rem 1rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '8px', color: textMain, fontWeight: 600, fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.375rem' }}>
-                      <i className="lni lni-bar-chart" /> Lihat Hasil
+                      <i className="lni lni-bar-chart-4" /> Lihat Hasil
                     </Link>
                   )}
                 </div>

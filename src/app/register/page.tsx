@@ -88,13 +88,13 @@ export default function RegisterPage() {
               borderRadius: '10px', padding: '0.875rem', marginBottom: '1.25rem',
               color: '#fca5a5', fontSize: '0.875rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
             }}>
-              <i className="lni lni-warning" /> {error}
+              <i className="lni lni-info" /> {error}
             </div>
           )}
 
           {[
-            { name: 'name', label: 'Nama Lengkap', icon: 'lni-user', type: 'text', placeholder: 'Budi Santoso' },
-            { name: 'email', label: 'Email', icon: 'lni-envelope', type: 'email', placeholder: 'budi@email.com' },
+            { name: 'name', label: 'Nama Lengkap', icon: 'lni-user-4', type: 'text', placeholder: 'Budi Santoso' },
+            { name: 'email', label: 'Email', icon: 'lni-envelope-1', type: 'email', placeholder: 'budi@email.com' },
             { name: 'phone', label: 'No. Telepon', icon: 'lni-phone', type: 'tel', placeholder: '08xxxxxxxxxx' },
           ].map(field => (
             <div key={field.name} style={{ marginBottom: '1rem' }}>
@@ -121,7 +121,7 @@ export default function RegisterPage() {
               Password
             </label>
             <div style={{ position: 'relative' }}>
-              <i className="lni lni-lock-alt" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
+              <i className="lni lni-locked-1" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
               <input name="password" type={showPass ? 'text' : 'password'} placeholder="Min. 8 karakter"
                 value={form.password} onChange={handleChange} required minLength={8}
                 style={{ ...inputStyle, paddingRight: '2.75rem' }}
@@ -139,7 +139,7 @@ export default function RegisterPage() {
               Konfirmasi Password
             </label>
             <div style={{ position: 'relative' }}>
-              <i className="lni lni-lock-alt" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
+              <i className="lni lni-locked-1" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: '#8BA3B5', fontSize: '1rem' }} />
               <input name="password_confirm" type={showPass ? 'text' : 'password'} placeholder="Ulangi password"
                 value={form.password_confirm} onChange={handleChange} required
                 style={inputStyle}
@@ -159,7 +159,7 @@ export default function RegisterPage() {
             boxShadow: loading ? 'none' : '0 4px 16px rgba(255,155,81,0.4)',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
           }}>
-            {loading ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Mendaftar...</> : <><i className="lni lni-checkmark" /> Buat Akun</>}
+            {loading ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Mendaftar...</> : <><i className="lni lni-check" /> Buat Akun</>}
           </button>
         </form>
 

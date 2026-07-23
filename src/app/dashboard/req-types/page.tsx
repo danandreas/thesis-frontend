@@ -58,7 +58,7 @@ export default function ReqTypesPage() {
 
   // Ikon sesuai kode
   const iconMap: Record<string, string> = {
-    GPA: 'lni-graduation', TOEFL: 'lni-world', IELTS: 'lni-world', CERT: 'lni-certificate', WORK: 'lni-briefcase',
+    GPA: 'lni-graduation-cap-1', TOEFL: 'lni-globe-1', IELTS: 'lni-globe-1', CERT: 'lni-certificate-badge-1', WORK: 'lni-briefcase-1',
   };
 
   return (
@@ -82,7 +82,7 @@ export default function ReqTypesPage() {
         </div>
       ) : items.length === 0 ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-files" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
+          <i className="lni lni-file-multiple" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
           Belum ada jenis syarat. Klik "Tambah Jenis" untuk memulai.
         </div>
       ) : (
@@ -99,7 +99,7 @@ export default function ReqTypesPage() {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.875rem' }}>
                 <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'rgba(255,155,81,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <i className={`lni ${iconMap[item.code] || 'lni-files'}`} style={{ fontSize: '1.25rem', color: '#FF9B51' }} />
+                  <i className={`lni ${iconMap[item.code] || 'lni-file-multiple'}`} style={{ fontSize: '1.25rem', color: '#FF9B51' }} />
                 </div>
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.625rem', borderRadius: '999px', fontSize: '0.65rem', fontWeight: 700, background: item.is_active ? 'rgba(16,185,129,0.12)' : 'rgba(100,116,139,0.1)', color: item.is_active ? '#10b981' : textMut }}>
                   {item.is_active ? 'Aktif' : 'Nonaktif'}
@@ -114,10 +114,10 @@ export default function ReqTypesPage() {
 
               <div style={{ display: 'flex', gap: '0.625rem', marginTop: 'auto' }}>
                 <button onClick={() => openEdit(item)} style={{ flex: 1, padding: '0.5rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '8px', color: textMain, cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.375rem', fontFamily: "'Montserrat', sans-serif", fontWeight: 600 }}>
-                  <i className="lni lni-pencil" /> Edit
+                  <i className="lni lni-pencil-1" /> Edit
                 </button>
                 <button onClick={() => handleDelete(item.id)} style={{ flex: 1, padding: '0.5rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.375rem', fontFamily: "'Montserrat', sans-serif", fontWeight: 600 }}>
-                  <i className="lni lni-trash-can" /> Hapus
+                  <i className="lni lni-trash-3" /> Hapus
                 </button>
               </div>
 
@@ -134,9 +134,9 @@ export default function ReqTypesPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '460px', animation: 'fadeInUp 0.25s ease' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>{editing ? 'Edit Jenis Syarat' : 'Tambah Jenis Syarat'}</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
             <form onSubmit={handleSave}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div><label style={labelStyle}>Kode</label><input style={inputStyle} value={form.code} onChange={e => setForm(p => ({ ...p, code: e.target.value.toUpperCase() }))} placeholder="GPA" required maxLength={20} onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -149,7 +149,7 @@ export default function ReqTypesPage() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                    {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                   </button>
                 </div>
               </div>

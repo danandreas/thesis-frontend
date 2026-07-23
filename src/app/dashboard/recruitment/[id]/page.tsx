@@ -133,7 +133,7 @@ export default function RecruitmentDetailPage() {
   if (loading) return (
     <DashboardLayout>
       <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-        <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
+        <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
         Memuat data rekrutmen...
       </div>
       <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
@@ -182,7 +182,7 @@ export default function RecruitmentDetailPage() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <h2 style={{ fontWeight: 700, color: textMain, fontSize: '1rem' }}>
-              <i className="lni lni-briefcase" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
+              <i className="lni lni-briefcase-1" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
               Posisi ({rec.positions?.length || 0})
             </h2>
             {rec.status === 'draft' && (
@@ -204,10 +204,10 @@ export default function RecruitmentDetailPage() {
                   {rec.status === 'draft' && (
                     <div style={{ display: 'flex', gap: '0.375rem', flexShrink: 0 }}>
                       <button onClick={() => openEditPos(pos)} style={{ padding: '0.3rem 0.625rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '6px', color: textMain, cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                        <i className="lni lni-pencil" />
+                        <i className="lni lni-pencil-1" />
                       </button>
                       <button onClick={() => deletePos(pos.id)} style={{ padding: '0.3rem 0.625rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '6px', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                        <i className="lni lni-trash-can" />
+                        <i className="lni lni-trash-3" />
                       </button>
                     </div>
                   )}
@@ -238,8 +238,8 @@ export default function RecruitmentDetailPage() {
                             <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#FF9B51' }}>{pc.weight_manual}</span>
                             {rec.status === 'draft' && (
                               <>
-                                <button onClick={() => openEditCrit(pos.id, pc)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-pencil" /></button>
-                                <button onClick={() => deleteCrit(pc.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-trash-can" /></button>
+                                <button onClick={() => openEditCrit(pos.id, pc)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-pencil-1" /></button>
+                                <button onClick={() => deleteCrit(pc.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-trash-3" /></button>
                               </>
                             )}
                           </div>
@@ -252,14 +252,14 @@ export default function RecruitmentDetailPage() {
                 {/* Link ke halaman questions */}
                 <div style={{ padding: '0.75rem 1.25rem', borderTop: `1px solid ${border}` }}>
                   <Link href={`/dashboard/recruitment/${recId}/positions/${pos.id}`} style={{ fontSize: '0.8rem', color: '#FF9B51', textDecoration: 'none', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.375rem' }}>
-                    <i className="lni lni-question-circle" /> Kelola Pertanyaan Asesmen →
+                    <i className="lni lni-question-mark-circle" /> Kelola Pertanyaan Asesmen →
                   </Link>
                 </div>
               </div>
             ))}
             {!rec.positions?.length && (
               <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '14px', padding: '2rem', textAlign: 'center', color: textMut }}>
-                <i className="lni lni-briefcase" style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem' }} />
+                <i className="lni lni-briefcase-1" style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem' }} />
                 Belum ada posisi.
               </div>
             )}
@@ -270,7 +270,7 @@ export default function RecruitmentDetailPage() {
         <div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
             <h2 style={{ fontWeight: 700, color: textMain, fontSize: '1rem' }}>
-              <i className="lni lni-files" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
+              <i className="lni lni-file-multiple" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
               Syarat Tambahan ({rec.requirements?.length || 0})
             </h2>
             {rec.status === 'draft' && (
@@ -282,7 +282,7 @@ export default function RecruitmentDetailPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '14px', overflow: 'hidden' }}>
             {!rec.requirements?.length ? (
               <div style={{ padding: '2rem', textAlign: 'center', color: textMut }}>
-                <i className="lni lni-files" style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem' }} />
+                <i className="lni lni-file-multiple" style={{ fontSize: '2rem', display: 'block', marginBottom: '0.5rem' }} />
                 Belum ada syarat tambahan.
               </div>
             ) : (
@@ -298,10 +298,10 @@ export default function RecruitmentDetailPage() {
                   {rec.status === 'draft' && (
                     <div style={{ display: 'flex', gap: '0.375rem' }}>
                       <button onClick={() => openEditReq(r)} style={{ padding: '0.3rem 0.625rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '6px', color: textMain, cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                        <i className="lni lni-pencil" />
+                        <i className="lni lni-pencil-1" />
                       </button>
                       <button onClick={() => deleteReq(r.id)} style={{ padding: '0.3rem 0.625rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '6px', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                        <i className="lni lni-trash-can" />
+                        <i className="lni lni-trash-3" />
                       </button>
                     </div>
                   )}
@@ -322,9 +322,9 @@ export default function RecruitmentDetailPage() {
                  modal === 'requirement' ? (editReq ? 'Edit Syarat' : 'Tambah Syarat') :
                  (editCrit ? 'Edit Kriteria Posisi' : 'Tambah Kriteria ke Posisi')}
               </h2>
-              <button onClick={() => setModal(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setModal(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
 
             {/* Position form */}
             {modal === 'position' && (
@@ -336,7 +336,7 @@ export default function RecruitmentDetailPage() {
                   <div style={{ display: 'flex', gap: '0.75rem' }}>
                     <button type="button" onClick={() => setModal(null)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                     <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                      {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                      {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                     </button>
                   </div>
                 </div>
@@ -362,7 +362,7 @@ export default function RecruitmentDetailPage() {
                   <div style={{ display: 'flex', gap: '0.75rem' }}>
                     <button type="button" onClick={() => setModal(null)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                     <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                      {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                      {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                     </button>
                   </div>
                 </div>
@@ -396,7 +396,7 @@ export default function RecruitmentDetailPage() {
                   <div style={{ display: 'flex', gap: '0.75rem' }}>
                     <button type="button" onClick={() => setModal(null)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                     <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                      {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                      {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                     </button>
                   </div>
                 </div>

@@ -106,10 +106,10 @@ export default function ProfilePage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem', alignItems: 'start' }}>
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '1.5rem' }}>
           <h2 style={{ fontWeight: 700, fontSize: '1rem', color: textMain, marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <i className="lni lni-user" style={{ color: '#FF9B51' }} /> Informasi Pribadi
+            <i className="lni lni-user-4" style={{ color: '#FF9B51' }} /> Informasi Pribadi
           </h2>
-          {success && <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#10b981', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-checkmark-circle" /> {success}</div>}
-          {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+          {success && <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#10b981', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-check-circle-1" /> {success}</div>}
+          {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
           <form onSubmit={handleProfileSave}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <div><label style={labelStyle}>Nama Lengkap</label><input style={inputStyle} value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -117,7 +117,7 @@ export default function ProfilePage() {
               <div><label style={labelStyle}>No. Telepon</label><input style={inputStyle} value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
               <div><label style={labelStyle}>Alamat</label><textarea style={{ ...inputStyle, minHeight: '80px', resize: 'vertical' } as React.CSSProperties} value={form.address} onChange={e => setForm(p => ({ ...p, address: e.target.value }))} onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
               <button type="submit" disabled={saving} style={{ padding: '0.75rem', background: saving ? '#94a3b8' : '#25343F', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, cursor: saving ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
               </button>
             </div>
           </form>
@@ -126,17 +126,17 @@ export default function ProfilePage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '1.5rem' }}>
             <h2 style={{ fontWeight: 700, fontSize: '1rem', color: textMain, marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <i className="lni lni-lock-alt" style={{ color: '#FF9B51' }} /> Ganti Password
+              <i className="lni lni-locked-1" style={{ color: '#FF9B51' }} /> Ganti Password
             </h2>
-            {passSuccess && <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#10b981', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-checkmark-circle" /> {passSuccess}</div>}
-            {passError && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {passError}</div>}
+            {passSuccess && <div style={{ background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#10b981', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-check-circle-1" /> {passSuccess}</div>}
+            {passError && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {passError}</div>}
             <form onSubmit={handlePasswordChange}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
                 {[{ key: 'current_password', label: 'Password Saat Ini' }, { key: 'password', label: 'Password Baru' }, { key: 'password_confirm', label: 'Konfirmasi Password Baru' }].map(f => (
                   <div key={f.key}><label style={labelStyle}>{f.label}</label><input type="password" style={inputStyle} value={passForm[f.key as keyof typeof passForm]} onChange={e => setPassForm(p => ({ ...p, [f.key]: e.target.value }))} required minLength={f.key !== 'current_password' ? 8 : 1} onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
                 ))}
                 <button type="submit" disabled={passLoading} style={{ padding: '0.75rem', background: passLoading ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, cursor: passLoading ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                  {passLoading ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Mengubah...</> : <><i className="lni lni-lock-alt" /> Ubah Password</>}
+                  {passLoading ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Mengubah...</> : <><i className="lni lni-locked-1" /> Ubah Password</>}
                 </button>
               </div>
             </form>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '1.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
               <h2 style={{ fontWeight: 700, fontSize: '1rem', color: textMain, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="lni lni-graduation" style={{ color: '#FF9B51' }} /> Riwayat Pendidikan
+                <i className="lni lni-graduation-cap-1" style={{ color: '#FF9B51' }} /> Riwayat Pendidikan
               </h2>
               <button onClick={openAddEdu} style={{ padding: '0.375rem 0.75rem', background: '#FF9B51', border: 'none', borderRadius: '8px', color: 'white', fontWeight: 700, fontSize: '0.75rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                 <i className="lni lni-plus" /> Tambah
@@ -164,8 +164,8 @@ export default function ProfilePage() {
                         <p style={{ fontSize: '0.75rem', color: textMut, marginTop: '0.2rem' }}>IPK: <strong style={{ color: '#FF9B51' }}>{edu.gpa}</strong> · {edu.start_year} — {edu.is_current ? 'Sekarang' : edu.end_year}</p>
                       </div>
                       <div style={{ display: 'flex', gap: '0.375rem' }}>
-                        <button onClick={() => openEditEdu(edu)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '0.875rem' }}><i className="lni lni-pencil" /></button>
-                        <button onClick={() => handleEduDelete(edu.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontSize: '0.875rem' }}><i className="lni lni-trash-can" /></button>
+                        <button onClick={() => openEditEdu(edu)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '0.875rem' }}><i className="lni lni-pencil-1" /></button>
+                        <button onClick={() => handleEduDelete(edu.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontSize: '0.875rem' }}><i className="lni lni-trash-3" /></button>
                       </div>
                     </div>
                   </div>
@@ -181,9 +181,9 @@ export default function ProfilePage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '500px', animation: 'fadeInUp 0.25s ease', maxHeight: '90vh', overflowY: 'auto' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>{editEdu ? 'Edit Pendidikan' : 'Tambah Pendidikan'}</h2>
-              <button onClick={() => setEduModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setEduModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {eduError && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {eduError}</div>}
+            {eduError && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {eduError}</div>}
             <form onSubmit={handleEduSave}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div><label style={labelStyle}>Nama Institusi</label><input style={inputStyle} value={eduForm.institution} onChange={e => setEduForm(p => ({ ...p, institution: e.target.value }))} placeholder="Universitas Indonesia" required onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -203,7 +203,7 @@ export default function ProfilePage() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button type="button" onClick={() => setEduModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={eduSaving} style={{ flex: 1, padding: '0.75rem', background: eduSaving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: eduSaving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {eduSaving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                    {eduSaving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                   </button>
                 </div>
               </div>

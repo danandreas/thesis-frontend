@@ -17,10 +17,10 @@ export default function NotFound() {
         </p>
         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="/dashboard" style={{ padding: '0.75rem 1.5rem', background: '#FF9B51', borderRadius: '10px', color: 'white', fontWeight: 700, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-            <i className="lni lni-dashboard" /> Dashboard
+            <i className="lni lni-dashboard-square-1" /> Dashboard
           </Link>
           <Link href="/" style={{ padding: '0.75rem 1.5rem', border: '1.5px solid rgba(255,255,255,0.2)', borderRadius: '10px', color: 'white', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-            <i className="lni lni-home" /> Beranda
+            <i className="lni lni-home-2" /> Beranda
           </Link>
         </div>
       </div>

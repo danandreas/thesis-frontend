@@ -5,32 +5,32 @@ import { useEffect, useState } from 'react';
 
 const features = [
   {
-    icon: 'lni lni-brain',
+    icon: 'lni lni-bulb-2',
     title: 'ML-Enhanced Scoring',
     desc: 'Algoritma PSO dan EWM mengoptimasi bobot kriteria secara objektif berdasarkan data aktual kandidat.',
   },
   {
-    icon: 'lni lni-bar-chart',
+    icon: 'lni lni-bar-chart-4',
     title: 'Fuzzy-ELECTRE Ranking',
     desc: 'Metode Fuzzy Logic dikombinasikan ELECTRE menghasilkan ranking kandidat yang adil dan transparan.',
   },
   {
-    icon: 'lni lni-users',
+    icon: 'lni lni-user-multiple-4',
     title: 'Human-in-the-Loop',
     desc: 'Admin membandingkan ranking manual vs ML dan memilih keputusan terbaik dengan kontrol penuh.',
   },
   {
-    icon: 'lni lni-shield',
+    icon: 'lni lni-shield-2',
     title: 'Asesmen Tersamar',
     desc: 'Form Likert dirancang agar kandidat tidak mengetahui kriteria apa yang sedang diukur.',
   },
   {
-    icon: 'lni lni-dashboard',
+    icon: 'lni lni-dashboard-square-1',
     title: 'Dashboard Analitik',
     desc: 'Visualisasi perbandingan bobot, distribusi skor, dan spearman correlation antar metode.',
   },
   {
-    icon: 'lni lni-checkmark-circle',
+    icon: 'lni lni-check-circle-1',
     title: 'Multi-Posisi',
     desc: 'Satu batch rekrutmen dapat membuka beberapa posisi dengan profil kriteria berbeda.',
   },

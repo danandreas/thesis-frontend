@@ -11,9 +11,9 @@ interface Recruitment { id: number; code: string; title: string; description: st
 
 const statusColor = (s: string) => {
   if (s === 'active') return { bg: 'rgba(16,185,129,0.12)', color: '#10b981', icon: 'lni-play' };
-  if (s === 'draft')  return { bg: 'rgba(100,116,139,0.1)', color: '#64748b', icon: 'lni-pencil' };
-  if (s === 'closed') return { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', icon: 'lni-lock-alt' };
-  return { bg: 'rgba(100,116,139,0.1)', color: '#64748b', icon: 'lni-tag' };
+  if (s === 'draft')  return { bg: 'rgba(100,116,139,0.1)', color: '#64748b', icon: 'lni-pencil-1' };
+  if (s === 'closed') return { bg: 'rgba(239,68,68,0.12)', color: '#ef4444', icon: 'lni-locked-1' };
+  return { bg: 'rgba(100,116,139,0.1)', color: '#64748b', icon: 'lni-clipboard' };
 };
 
 export default function RecruitmentPage() {
@@ -90,11 +90,11 @@ export default function RecruitmentPage() {
 
       {loading ? (
         <div style={{ textAlign: 'center', padding: '3rem', color: textMut }}>
-          <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
+          <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
         </div>
       ) : items.length === 0 ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-briefcase" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
+          <i className="lni lni-briefcase-1" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
           Belum ada rekrutmen.
         </div>
       ) : (
@@ -123,16 +123,16 @@ export default function RecruitmentPage() {
                     {rec.status === 'draft' && (
                       <>
                         <button onClick={() => handlePublish(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', color: '#10b981', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className={actionLoading === rec.id ? 'lni lni-spinner' : 'lni lni-play'} style={actionLoading === rec.id ? { animation: 'spin 1s linear infinite' } : {}} /> Publish
+                          <i className={actionLoading === rec.id ? 'lni lni-spinner-3' : 'lni lni-play'} style={actionLoading === rec.id ? { animation: 'spin 1s linear infinite' } : {}} /> Publish
                         </button>
                         <button onClick={() => handleDelete(rec.id)} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className="lni lni-trash-can" /> Hapus
+                          <i className="lni lni-trash-3" /> Hapus
                         </button>
                       </>
                     )}
                     {rec.status === 'active' && (
                       <button onClick={() => handleClose(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                        <i className="lni lni-lock-alt" /> Tutup
+                        <i className="lni lni-locked-1" /> Tutup
                       </button>
                     )}
                   </div>
@@ -143,7 +143,7 @@ export default function RecruitmentPage() {
                   <div style={{ padding: '0.875rem 1.5rem', display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
                     {rec.positions.map(pos => (
                       <div key={pos.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: textMut, background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFC', padding: '0.375rem 0.75rem', borderRadius: '8px', border: `1px solid ${border}` }}>
-                        <i className="lni lni-briefcase" style={{ color: '#FF9B51' }} />
+                        <i className="lni lni-briefcase-1" style={{ color: '#FF9B51' }} />
                         <span style={{ fontWeight: 600, color: textMain }}>{pos.title}</span>
                         <span>·</span>
                         <span>{pos.applicant_count}/{pos.quota} pelamar</span>
@@ -163,9 +163,9 @@ export default function RecruitmentPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '480px', animation: 'fadeInUp 0.25s ease' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>Buat Rekrutmen Baru</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
             <form onSubmit={handleSave}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div><label style={labelStyle}>Kode Rekrutmen</label><input style={inputStyle} value={form.code} onChange={e => setForm(p => ({ ...p, code: e.target.value }))} placeholder="REC-2025-001" required onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -176,7 +176,7 @@ export default function RecruitmentPage() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Buat</>}
+                    {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Buat</>}
                   </button>
                 </div>
               </div>

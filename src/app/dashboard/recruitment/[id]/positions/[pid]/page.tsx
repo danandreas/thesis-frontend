@@ -109,7 +109,7 @@ export default function PositionQuestionsPage() {
   if (loading) return (
     <DashboardLayout>
       <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-        <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
+        <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
       </div>
       <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
     </DashboardLayout>
@@ -120,9 +120,9 @@ export default function PositionQuestionsPage() {
       {/* Breadcrumb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', fontSize: '0.8rem', color: textMut, flexWrap: 'wrap' }}>
         <Link href="/dashboard/recruitment" style={{ color: textMut, textDecoration: 'none' }}>Rekrutmen</Link>
-        <i className="lni lni-chevron-right" style={{ fontSize: '0.7rem' }} />
+        <i className="lni lni-chevron-right-circle" style={{ fontSize: '0.7rem' }} />
         <Link href={`/dashboard/recruitment/${recId}`} style={{ color: textMut, textDecoration: 'none' }}>{position?.recruitment_title || `REC #${recId}`}</Link>
-        <i className="lni lni-chevron-right" style={{ fontSize: '0.7rem' }} />
+        <i className="lni lni-chevron-right-circle" style={{ fontSize: '0.7rem' }} />
         <span style={{ color: '#FF9B51', fontWeight: 600 }}>{position?.title}</span>
       </div>
 
@@ -140,7 +140,7 @@ export default function PositionQuestionsPage() {
 
       {questions.length === 0 ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-question-circle" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
+          <i className="lni lni-question-mark-circle" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
           Belum ada pertanyaan. Tambahkan pertanyaan Likert untuk asesmen ini.
         </div>
       ) : (
@@ -159,10 +159,10 @@ export default function PositionQuestionsPage() {
                     <i className={`lni ${expandedQ === q.id ? 'lni-chevron-up' : 'lni-chevron-down'}`} />
                   </button>
                   <button onClick={() => openEditQ(q)} style={{ padding: '0.3rem 0.625rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '6px', color: textMain, cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                    <i className="lni lni-pencil" />
+                    <i className="lni lni-pencil-1" />
                   </button>
                   <button onClick={() => deleteQ(q.id)} style={{ padding: '0.3rem 0.625rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '6px', color: '#ef4444', cursor: 'pointer', fontSize: '0.75rem', fontFamily: "'Montserrat', sans-serif" }}>
-                    <i className="lni lni-trash-can" />
+                    <i className="lni lni-trash-3" />
                   </button>
                 </div>
               </div>
@@ -187,8 +187,8 @@ export default function PositionQuestionsPage() {
                             <span style={{ fontSize: '0.8rem', color: textMain }}>{opt.option_text}</span>
                           </div>
                           <div style={{ display: 'flex', gap: '0.25rem' }}>
-                            <button onClick={() => openEditOpt(q.id, opt)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-pencil" /></button>
-                            <button onClick={() => deleteOpt(opt.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-trash-can" /></button>
+                            <button onClick={() => openEditOpt(q.id, opt)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-pencil-1" /></button>
+                            <button onClick={() => deleteOpt(opt.id)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', padding: '0.15rem', fontSize: '0.8rem' }}><i className="lni lni-trash-3" /></button>
                           </div>
                         </div>
                       ))}
@@ -207,9 +207,9 @@ export default function PositionQuestionsPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '520px', animation: 'fadeInUp 0.25s ease' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>{editQ ? 'Edit Pertanyaan' : 'Tambah Pertanyaan'}</h2>
-              <button onClick={() => setQModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setQModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
             <form onSubmit={saveQ}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div><label style={labelStyle}>Teks Pertanyaan</label><textarea style={{ ...inputStyle, minHeight: '80px', resize: 'vertical' } as React.CSSProperties} value={qForm.question_text} onChange={e => setQForm(p => ({ ...p, question_text: e.target.value }))} placeholder="Seberapa sering Anda menyelesaikan masalah teknis secara mandiri?" required onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -217,7 +217,7 @@ export default function PositionQuestionsPage() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button type="button" onClick={() => setQModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                    {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                   </button>
                 </div>
               </div>
@@ -232,9 +232,9 @@ export default function PositionQuestionsPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '440px', animation: 'fadeInUp 0.25s ease' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>{editOpt ? 'Edit Opsi' : 'Tambah Opsi Jawaban'}</h2>
-              <button onClick={() => setOptModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setOptModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
             <form onSubmit={saveOpt}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div><label style={labelStyle}>Teks Opsi</label><input style={inputStyle} value={optForm.option_text} onChange={e => setOptForm(p => ({ ...p, option_text: e.target.value }))} placeholder="Sangat Sering" required onFocus={e => e.target.style.borderColor = '#FF9B51'} onBlur={e => e.target.style.borderColor = border} /></div>
@@ -252,7 +252,7 @@ export default function PositionQuestionsPage() {
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                   <button type="button" onClick={() => setOptModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                    {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                   </button>
                 </div>
               </div>

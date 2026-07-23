@@ -77,12 +77,12 @@ export default function CriteriaPage() {
       <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', overflow: 'hidden' }}>
         {loading ? (
           <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-            <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
+            <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} />
             Memuat data...
           </div>
         ) : items.length === 0 ? (
           <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-            <i className="lni lni-tag" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
+            <i className="lni lni-clipboard" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
             Belum ada kriteria. Klik "Tambah Kriteria" untuk memulai.
           </div>
         ) : (
@@ -108,17 +108,17 @@ export default function CriteriaPage() {
                     </td>
                     <td style={{ padding: '0.875rem 1rem' }}>
                       <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 700, background: item.is_active ? 'rgba(16,185,129,0.12)' : 'rgba(100,116,139,0.1)', color: item.is_active ? '#10b981' : textMut }}>
-                        <i className={item.is_active ? 'lni lni-checkmark-circle' : 'lni lni-close'} />
+                        <i className={item.is_active ? 'lni lni-check-circle-1' : 'lni lni-xmark-circle'} />
                         {item.is_active ? 'Aktif' : 'Nonaktif'}
                       </span>
                     </td>
                     <td style={{ padding: '0.875rem 1rem' }}>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button onClick={() => openEdit(item)} style={{ padding: '0.375rem 0.75rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '8px', color: textMain, cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.375rem', fontFamily: "'Montserrat', sans-serif" }}>
-                          <i className="lni lni-pencil" /> Edit
+                          <i className="lni lni-pencil-1" /> Edit
                         </button>
                         <button onClick={() => handleDelete(item.id)} disabled={deleting === item.id} style={{ padding: '0.375rem 0.75rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', cursor: 'pointer', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.375rem', fontFamily: "'Montserrat', sans-serif" }}>
-                          <i className={deleting === item.id ? 'lni lni-spinner' : 'lni lni-trash-can'} style={deleting === item.id ? { animation: 'spin 1s linear infinite' } : {}} />
+                          <i className={deleting === item.id ? 'lni lni-spinner-3' : 'lni lni-trash-3'} style={deleting === item.id ? { animation: 'spin 1s linear infinite' } : {}} />
                           Hapus
                         </button>
                       </div>
@@ -137,9 +137,9 @@ export default function CriteriaPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '20px', padding: '2rem', width: '100%', maxWidth: '480px', animation: 'fadeInUp 0.25s ease' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
               <h2 style={{ fontWeight: 800, fontSize: '1.125rem', color: textMain }}>{editing ? 'Edit Kriteria' : 'Tambah Kriteria'}</h2>
-              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-close" /></button>
+              <button onClick={() => setShowModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '1.25rem' }}><i className="lni lni-xmark-circle" /></button>
             </div>
-            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-warning" /> {error}</div>}
+            {error && <div style={{ background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', padding: '0.75rem', color: '#ef4444', fontSize: '0.875rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><i className="lni lni-info" /> {error}</div>}
             <form onSubmit={handleSave}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <div>
@@ -166,7 +166,7 @@ export default function CriteriaPage() {
                 <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
                   <button type="button" onClick={() => setShowModal(false)} style={{ flex: 1, padding: '0.75rem', background: 'none', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, cursor: 'pointer', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>Batal</button>
                   <button type="submit" disabled={saving} style={{ flex: 1, padding: '0.75rem', background: saving ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                    {saving ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-save" /> Simpan</>}
+                    {saving ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Menyimpan...</> : <><i className="lni lni-floppy-disk-1" /> Simpan</>}
                   </button>
                 </div>
               </div>

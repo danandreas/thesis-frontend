@@ -9,18 +9,18 @@ import type { UserData } from '@/lib/auth';
 
 // ── Navigasi berdasarkan role ───────────────────────────────────
 const adminNav = [
-  { label: 'Dashboard',       href: '/dashboard',             icon: 'lni-dashboard' },
-  { label: 'Pengguna',        href: '/dashboard/users',       icon: 'lni-users' },
-  { label: 'Kriteria',        href: '/dashboard/criteria',    icon: 'lni-tag' },
-  { label: 'Jenis Syarat',    href: '/dashboard/req-types',   icon: 'lni-files',  },
-  { label: 'Rekrutmen',       href: '/dashboard/recruitment', icon: 'lni-briefcase' },
-  { label: 'Laporan',         href: '/dashboard/report',      icon: 'lni-bar-chart' },
+  { label: 'Dashboard',       href: '/dashboard',             icon: 'lni-dashboard-square-1' },
+  { label: 'Pengguna',        href: '/dashboard/users',       icon: 'lni-user-multiple-4' },
+  { label: 'Kriteria',        href: '/dashboard/criteria',    icon: 'lni-clipboard' },
+  { label: 'Jenis Syarat',    href: '/dashboard/req-types',   icon: 'lni-file-multiple',  },
+  { label: 'Rekrutmen',       href: '/dashboard/recruitment', icon: 'lni-briefcase-1' },
+  { label: 'Laporan',         href: '/dashboard/report',      icon: 'lni-bar-chart-4' },
 ];
 
 const candidateNav = [
-  { label: 'Dashboard',       href: '/dashboard',               icon: 'lni-dashboard' },
-  { label: 'Rekrutmen Aktif', href: '/dashboard/recruitments',  icon: 'lni-briefcase' },
-  { label: 'Lamaran Saya',    href: '/dashboard/my-applications',icon: 'lni-files' },
+  { label: 'Dashboard',       href: '/dashboard',               icon: 'lni-dashboard-square-1' },
+  { label: 'Rekrutmen Aktif', href: '/dashboard/recruitments',  icon: 'lni-briefcase-1' },
+  { label: 'Lamaran Saya',    href: '/dashboard/my-applications',icon: 'lni-file-multiple' },
 ];
 
 interface DashboardLayoutProps {
@@ -122,7 +122,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             fontWeight: pathname === '/dashboard/profile' ? 700 : 500, fontSize: '0.875rem',
             textDecoration: 'none', transition: 'all 0.2s',
           }}>
-            <i className="lni lni-user" style={{ fontSize: '1.1rem', width: '20px' }} />
+            <i className="lni lni-user-4" style={{ fontSize: '1.1rem', width: '20px' }} />
             Profil
           </Link>
         </div>
@@ -173,7 +173,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMain, fontSize: '1.25rem', padding: '0.25rem', display: 'flex', alignItems: 'center' }}
           className="mobile-menu-btn"
         >
-          <i className="lni lni-menu" />
+          <i className="lni lni-menu-hamburger-1" />
         </button>
 
         {/* Logo (mobile) */}
@@ -201,7 +201,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           }}
           title={isDark ? 'Mode Terang' : 'Mode Gelap'}
         >
-          <i className={isDark ? 'lni lni-sun' : 'lni lni-night'} />
+          <i className={isDark ? 'lni lni-sun-1' : 'lni lni-moon-half-right-5'} />
         </button>
 
         {/* Avatar dropdown */}
@@ -249,7 +249,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                       fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase' as const,
                       color: user.role.code === 'admin' ? '#FF7A1F' : '#2563eb',
                     }}>
-                      <i className={user.role.code === 'admin' ? 'lni lni-shield' : 'lni lni-user'} />
+                      <i className={user.role.code === 'admin' ? 'lni lni-shield-2' : 'lni lni-user-4'} />
                       {user.role.name}
                     </div>
                   </div>
@@ -266,7 +266,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(37,52,63,0.04)'}
                 onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = 'transparent'}
                 >
-                  <i className="lni lni-user" style={{ color: '#FF9B51' }} />
+                  <i className="lni lni-user-4" style={{ color: '#FF9B51' }} />
                   Profil Saya
                 </Link>
                 <button onClick={() => { setAvatarOpen(false); logout(); }} style={{

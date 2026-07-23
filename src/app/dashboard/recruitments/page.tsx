@@ -65,11 +65,11 @@ export default function RecruitmentsPage() {
 
       {loading ? (
         <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
+          <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat...
         </div>
       ) : items.length === 0 ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-briefcase" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
+          <i className="lni lni-briefcase-1" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem' }} />
           Belum ada rekrutmen aktif saat ini.
         </div>
       ) : (
@@ -107,11 +107,11 @@ export default function RecruitmentsPage() {
                       {pos.description && <p style={{ fontSize: '0.8rem', color: textMut, lineHeight: 1.5 }}>{pos.description}</p>}
                       {status ? (
                         <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.3rem 0.75rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700, background: status.bg, color: status.color, alignSelf: 'flex-start' }}>
-                          <i className="lni lni-checkmark-circle" /> Status: {status.label}
+                          <i className="lni lni-check-circle-1" /> Status: {status.label}
                         </span>
                       ) : (
                         <button onClick={() => handleApply(pos.id)} disabled={applying === pos.id} style={{ padding: '0.625rem 1rem', background: applying === pos.id ? '#94a3b8' : '#FF9B51', border: 'none', borderRadius: '8px', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: applying === pos.id ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.375rem', alignSelf: 'flex-start' }}>
-                          {applying === pos.id ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Mendaftar...</> : <><i className="lni lni-enter" /> Daftar Sekarang</>}
+                          {applying === pos.id ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Mendaftar...</> : <><i className="lni lni-enter" /> Daftar Sekarang</>}
                         </button>
                       )}
                     </div>

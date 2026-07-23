@@ -89,7 +89,7 @@ export default function ReportPage() {
         </select>
         {selectedPos && (
           <button onClick={handleGenerate} disabled={generating} style={{ padding: '0.625rem 1.25rem', background: generating ? '#94a3b8' : '#25343F', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, fontSize: '0.875rem', cursor: generating ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
-            {generating ? <><i className="lni lni-spinner" style={{ animation: 'spin 1s linear infinite' }} /> Memproses Fuzzy+EWM+PSO+ELECTRE...</> : <><i className="lni lni-reload" /> Generate Ranking</>}
+            {generating ? <><i className="lni lni-spinner-3" style={{ animation: 'spin 1s linear infinite' }} /> Memproses Fuzzy+EWM+PSO+ELECTRE...</> : <><i className="lni lni-refresh-circle-1-clockwise" /> Generate Ranking</>}
           </button>
         )}
       </div>
@@ -98,10 +98,10 @@ export default function ReportPage() {
       {genResult && (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           {[
-            { label: 'Total Kandidat', value: genResult.total_candidates, icon: 'lni-users', color: '#3b82f6' },
-            { label: 'Iterasi PSO', value: genResult.pso_iterations, icon: 'lni-reload', color: '#FF9B51' },
-            { label: 'PSO Konvergen', value: genResult.pso_converged ? 'Ya' : 'Tidak', icon: 'lni-checkmark-circle', color: genResult.pso_converged ? '#10b981' : '#ef4444' },
-            { label: 'Spearman Corr.', value: genResult.spearman_correlation != null ? genResult.spearman_correlation.toFixed(4) : '—', icon: 'lni-bar-chart', color: '#8b5cf6' },
+            { label: 'Total Kandidat', value: genResult.total_candidates, icon: 'lni-user-multiple-4', color: '#3b82f6' },
+            { label: 'Iterasi PSO', value: genResult.pso_iterations, icon: 'lni-refresh-circle-1-clockwise', color: '#FF9B51' },
+            { label: 'PSO Konvergen', value: genResult.pso_converged ? 'Ya' : 'Tidak', icon: 'lni-check-circle-1', color: genResult.pso_converged ? '#10b981' : '#ef4444' },
+            { label: 'Spearman Corr.', value: genResult.spearman_correlation != null ? genResult.spearman_correlation.toFixed(4) : '—', icon: 'lni-bar-chart-4', color: '#8b5cf6' },
           ].map((s, i) => (
             <div key={i} style={{ background: surface, border: `1px solid ${border}`, borderRadius: '12px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -117,7 +117,7 @@ export default function ReportPage() {
       {/* Ranking Table */}
       {loadingRank ? (
         <div style={{ padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-spinner" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat ranking...
+          <i className="lni lni-spinner-3" style={{ fontSize: '2rem', animation: 'spin 1s linear infinite', display: 'block', marginBottom: '0.75rem' }} /> Memuat ranking...
         </div>
       ) : ranking.length > 0 ? (
         <>
@@ -125,16 +125,16 @@ export default function ReportPage() {
           <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '1.25rem 1.5rem', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
               <h3 style={{ fontWeight: 700, color: textMain, fontSize: '0.9375rem', marginBottom: '0.25rem' }}>
-                <i className="lni lni-users" style={{ color: '#FF9B51', marginRight: '0.375rem' }} /> Human-in-the-Loop
+                <i className="lni lni-user-multiple-4" style={{ color: '#FF9B51', marginRight: '0.375rem' }} /> Human-in-the-Loop
               </h3>
               <p style={{ color: textMut, fontSize: '0.8rem' }}>Pilih versi ranking yang akan digunakan sebagai final</p>
             </div>
             <div style={{ display: 'flex', gap: '0.75rem' }}>
               <button onClick={() => handleChoose('manual')} disabled={choosing} style={{ padding: '0.625rem 1.25rem', background: 'rgba(37,52,63,0.08)', border: `1.5px solid #25343F`, borderRadius: '10px', color: '#25343F', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="lni lni-user" /> Pakai Bobot Manual
+                <i className="lni lni-user-4" /> Pakai Bobot Manual
               </button>
               <button onClick={() => handleChoose('ml')} disabled={choosing} style={{ padding: '0.625rem 1.25rem', background: '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <i className="lni lni-brain" /> Pakai Bobot ML
+                <i className="lni lni-bulb-2" /> Pakai Bobot ML
               </button>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function ReportPage() {
                         </td>
                         <td style={{ padding: '0.875rem 1rem' }}>
                           <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 700, background: r.is_recommended ? 'rgba(16,185,129,0.12)' : 'rgba(100,116,139,0.1)', color: r.is_recommended ? '#10b981' : textMut }}>
-                            <i className={r.is_recommended ? 'lni lni-checkmark-circle' : 'lni lni-close'} />
+                            <i className={r.is_recommended ? 'lni lni-check-circle-1' : 'lni lni-xmark-circle'} />
                             {r.is_recommended ? 'Direkomendasikan' : 'Tidak Lolos'}
                           </span>
                         </td>
@@ -194,7 +194,7 @@ export default function ReportPage() {
             <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', overflow: 'hidden' }}>
               <div style={{ padding: '1rem 1.5rem', borderBottom: `1px solid ${border}` }}>
                 <h3 style={{ fontWeight: 700, color: textMain }}>
-                  <i className="lni lni-bar-chart" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
+                  <i className="lni lni-bar-chart-4" style={{ color: '#FF9B51', marginRight: '0.5rem' }} />
                   Perbandingan Bobot: Manual vs EWM vs ML (PSO)
                 </h3>
               </div>
@@ -235,7 +235,7 @@ export default function ReportPage() {
         </>
       ) : selectedPos ? (
         <div style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', padding: '3rem', textAlign: 'center', color: textMut }}>
-          <i className="lni lni-bar-chart" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
+          <i className="lni lni-bar-chart-4" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '0.75rem' }} />
           <p style={{ fontWeight: 600, marginBottom: '0.25rem' }}>Ranking belum di-generate.</p>
           <p style={{ fontSize: '0.875rem' }}>Klik "Generate Ranking" untuk memulai proses Fuzzy → EWM → PSO → ELECTRE.</p>
         </div>
