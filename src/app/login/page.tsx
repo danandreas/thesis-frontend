@@ -65,7 +65,10 @@ export default function LoginPage() {
               fontWeight: 800, color: 'white', fontSize: '1rem', letterSpacing: '-0.02em',
               boxShadow: '0 8px 24px rgba(255,155,81,0.4)',
             }}>PsP</div>
-            <span style={{ color: 'white', fontWeight: 700, fontSize: '1.125rem' }}>Psychoposition</span>
+            <div style={{ color: 'white', fontWeight: 700, fontSize: '0.95rem', lineHeight: 0.88, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ display: 'block' }}>Psycho</span>
+              <span style={{ display: 'block' }}>position</span>
+            </div>
           </Link>
           <p style={{ color: '#8BA3B5', fontSize: '0.875rem', marginTop: '0.5rem' }}>
             Masuk ke akun Anda

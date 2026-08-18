@@ -19,29 +19,25 @@ export default function RecruitmentsPage() {
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState<number | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const listRes = await get<{ id: number }[]>('/content/recruitments');
-        if (listRes.success && listRes.data) {
-          const details = await Promise.all(listRes.data.map(r => get<Recruitment>(`/content/recruitments/${r.id}`)));
-          setItems(details.filter(r => r.success && r.data).map(r => r.data!));
-        }
-      } catch (e) { console.error(getErrorMessage(e)); }
-      finally { setLoading(false); }
-    })();
-  }, []);
+  // Bug #10 fix: GET /content/recruitments sudah mengembalikan data lengkap
+  // Tidak perlu loop N request detail per rekrutmen
+  const fetchRecruitments = async () => {
+    try {
+      const res = await get<Recruitment[]>('/content/recruitments');
+      if (res.success && res.data) setItems(res.data);
+    } catch (e) { console.error(getErrorMessage(e)); }
+    finally { setLoading(false); }
+  };
+
+  useEffect(() => { fetchRecruitments(); }, []);
 
   const handleApply = async (positionId: number) => {
     setApplying(positionId);
     try {
       await post(`/content/apply/${positionId}`);
-      // Refresh
-      const listRes = await get<{ id: number }[]>('/content/recruitments');
-      if (listRes.success && listRes.data) {
-        const details = await Promise.all(listRes.data.map(r => get<Recruitment>(`/content/recruitments/${r.id}`)));
-        setItems(details.filter(r => r.success && r.data).map(r => r.data!));
-      }
+      // Bug #10 fix: refresh dengan satu request, bukan N+1
+      const res = await get<Recruitment[]>('/content/recruitments');
+      if (res.success && res.data) setItems(res.data);
     } catch (err) { alert(getErrorMessage(err)); }
     finally { setApplying(null); }
   };

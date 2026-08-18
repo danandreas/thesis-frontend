@@ -6,6 +6,7 @@ import { get, post, getErrorMessage } from '@/lib/api';
 import { useTheme } from '@/hooks/useTheme';
 
 interface Position { id: number; title: string; quota: number; recruitment_id: number; }
+interface Recruitment { id: number; title: string; status: string; positions: Position[]; }
 interface RankingItem { application_id: number; candidate_name: string; candidate_email: string; rank_manual: number; rank_ml: number; final_score_manual: number; final_score_ml: number; is_recommended: boolean; admin_choice?: string; final_rank?: number; final_status?: string; }
 interface WeightComp { criteria_code: string; criteria_name: string; weight_manual: number; weight_ewm: number; weight_ml: number; difference: number; }
 
@@ -29,9 +30,12 @@ export default function ReportPage() {
   useEffect(() => {
     (async () => {
       try {
-        const res = await get<{ id: number; title: string; positions: Position[] }[]>('/master/recruitments');
+        // Bug fix: GET /master/recruitments sekarang mengembalikan { items, total, ... }
+        const res = await get<{ items: Recruitment[] }>('/master/recruitments?per_page=100');
         if (res.success && res.data) {
-          const allPos = res.data.filter(r => ['active','closed'].includes((r as unknown as { status: string }).status)).flatMap(r => r.positions || []);
+          const allPos = (res.data.items ?? [])
+            .filter(r => ['active', 'closed'].includes(r.status))
+            .flatMap(r => (r.positions || []).map(p => ({ ...p, recruitment_id: r.id })));
           setPositions(allPos);
         }
       } catch { /* ignore */ }

@@ -31,17 +31,36 @@ export default function RecruitmentPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [actionLoading, setActionLoading] = useState<number | null>(null);
+  // Bug #17: pagination + search state
+  const [search, setSearch]       = useState('');
+  const [filterStatus, setFilter] = useState('');
+  const [page, setPage]           = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal]           = useState(0);
+  const PER_PAGE = 20;
 
-  const fetchData = useCallback(async () => {
+  const fetchData = useCallback(async (pg = page, q = search, st = filterStatus) => {
     setLoading(true);
     try {
-      const res = await get<Recruitment[]>('/master/recruitments');
-      if (res.success && res.data) setItems(res.data);
+      const params = new URLSearchParams({
+        page:     String(pg),
+        per_page: String(PER_PAGE),
+        ...(q  ? { search: q }  : {}),
+        ...(st ? { status: st } : {}),
+      });
+      // Bug #17 fix: response sekarang { items, total, page, per_page, total_pages }
+      const res = await get<{ items: Recruitment[]; total: number; total_pages: number }>(`/master/recruitments?${params}`);
+      if (res.success && res.data) {
+        setItems(res.data.items ?? []);
+        setTotalPages(res.data.total_pages ?? 1);
+        setTotal(res.data.total ?? 0);
+        setPage(pg);
+      }
     } catch (e) { console.error(getErrorMessage(e)); }
     finally { setLoading(false); }
-  }, []);
+  }, [page, search, filterStatus]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => { fetchData(1, search, filterStatus); }, []);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault(); setError(''); setSaving(true);
@@ -69,7 +88,7 @@ export default function RecruitmentPage() {
 
   const handleDelete = async (id: number) => {
     if (!confirm('Hapus rekrutmen ini?')) return;
-    try { await del(`/master/recruitments/${id}`); fetchData(); }
+    try { await del(`/master/recruitments/${id}`); fetchData(1, search, filterStatus); }
     catch (err) { alert(getErrorMessage(err)); }
   };
 
@@ -78,14 +97,39 @@ export default function RecruitmentPage() {
 
   return (
     <DashboardLayout>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.75rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: textMain }}>Rekrutmen</h1>
-          <p style={{ color: textMut, fontSize: '0.875rem' }}>Kelola batch rekrutmen dan posisi</p>
+          <p style={{ color: textMut, fontSize: '0.875rem' }}>Kelola batch rekrutmen dan posisi · <strong style={{ color: '#FF9B51' }}>{total}</strong> total</p>
         </div>
         <button onClick={() => { setError(''); setShowModal(true); }} style={{ padding: '0.625rem 1.25rem', background: '#FF9B51', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, fontSize: '0.875rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <i className="lni lni-plus" /> Buat Rekrutmen
         </button>
+      </div>
+
+      {/* Search & filter toolbar */}
+      <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+        <div style={{ flex: 1, minWidth: '200px', position: 'relative' }}>
+          <i className="lni lni-search" style={{ position: 'absolute', left: '0.875rem', top: '50%', transform: 'translateY(-50%)', color: textMut, fontSize: '0.875rem' }} />
+          <input
+            style={{ ...inputStyle, paddingLeft: '2.25rem' }}
+            placeholder="Cari kode / judul..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && fetchData(1, search, filterStatus)}
+            onBlur={() => fetchData(1, search, filterStatus)}
+          />
+        </div>
+        <select
+          style={{ ...inputStyle, width: 'auto', minWidth: '130px' }}
+          value={filterStatus}
+          onChange={e => { setFilter(e.target.value); fetchData(1, search, e.target.value); }}
+        >
+          <option value="">Semua Status</option>
+          <option value="draft">Draft</option>
+          <option value="active">Active</option>
+          <option value="closed">Closed</option>
+        </select>
       </div>
 
       {loading ? (
@@ -146,7 +190,7 @@ export default function RecruitmentPage() {
                         <i className="lni lni-briefcase-1" style={{ color: '#FF9B51' }} />
                         <span style={{ fontWeight: 600, color: textMain }}>{pos.title}</span>
                         <span>·</span>
-                        <span>{pos.applicant_count}/{pos.quota} pelamar</span>
+                        <span>{pos.applicant_count ?? 0}/{pos.quota} pelamar</span>
                       </div>
                     ))}
                   </div>
@@ -155,6 +199,38 @@ export default function RecruitmentPage() {
             );
           })}
         </div>
+
+        {/* Pagination controls */}
+        {totalPages > 1 && (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+            <button
+              onClick={() => fetchData(page - 1, search, filterStatus)}
+              disabled={page <= 1}
+              style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page <= 1 ? textMut : textMain, cursor: page <= 1 ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+            >
+              <i className="lni lni-chevron-left" /> Prev
+            </button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 2).map((p, idx, arr) => (
+              <>
+                {idx > 0 && arr[idx - 1] !== p - 1 && <span key={`ellipsis-${p}`} style={{ color: textMut, fontSize: '0.8rem' }}>…</span>}
+                <button
+                  key={p}
+                  onClick={() => fetchData(p, search, filterStatus)}
+                  style={{ width: '36px', height: '36px', borderRadius: '8px', border: `1px solid ${p === page ? '#FF9B51' : border}`, background: p === page ? 'rgba(255,155,81,0.12)' : 'none', color: p === page ? '#FF9B51' : textMain, cursor: 'pointer', fontWeight: p === page ? 700 : 400, fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+                >
+                  {p}
+                </button>
+              </>
+            ))}
+            <button
+              onClick={() => fetchData(page + 1, search, filterStatus)}
+              disabled={page >= totalPages}
+              style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page >= totalPages ? textMut : textMain, cursor: page >= totalPages ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+            >
+              Next <i className="lni lni-chevron-right" />
+            </button>
+          </div>
+        )}
       )}
 
       {/* Modal Buat Rekrutmen */}

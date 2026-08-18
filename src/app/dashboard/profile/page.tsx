@@ -8,7 +8,7 @@ import { useTheme } from '@/hooks/useTheme';
 
 interface Education {
   id: number; institution: string; degree: string; major: string;
-  gpa: number; start_year: number; end_year: number; is_current: boolean;
+  gpa: number; gpa_scale: number; graduation_year: number | null; is_latest: boolean;
 }
 
 export default function ProfilePage() {
@@ -54,7 +54,8 @@ export default function ProfilePage() {
   const handleProfileSave = async (e: React.FormEvent) => {
     e.preventDefault(); setError(''); setSuccess(''); setSaving(true);
     try {
-      await put('/master/users/me', { name: form.name, phone: form.phone, address: form.address });
+      // Bug #4 fix: gunakan /auth/me bukan /master/users/me
+      await put('/auth/me', { name: form.name, phone: form.phone, address: form.address });
       setSuccess('Profil berhasil diperbarui.');
       const user = getUser();
       if (user) saveSession(getToken() || '', '', { ...user, name: form.name, phone: form.phone });
@@ -67,19 +68,30 @@ export default function ProfilePage() {
     if (passForm.password !== passForm.password_confirm) { setPassError('Konfirmasi password tidak cocok.'); return; }
     setPassLoading(true);
     try {
-      await put('/master/users/me/password', passForm);
+      // Bug #4 fix: gunakan /auth/me/password bukan /master/users/me/password
+      await put('/auth/me/password', passForm);
       setPassSuccess('Password berhasil diubah.'); setPassForm({ current_password: '', password: '', password_confirm: '' });
     } catch (err) { setPassError(getErrorMessage(err)); }
     finally { setPassLoading(false); }
   };
 
   const openAddEdu = () => { setEditEdu(null); setEduForm({ institution: '', degree: '', major: '', gpa: '', start_year: new Date().getFullYear().toString(), end_year: '', is_current: false }); setEduError(''); setEduModal(true); };
-  const openEditEdu = (edu: Education) => { setEditEdu(edu); setEduForm({ institution: edu.institution, degree: edu.degree, major: edu.major, gpa: edu.gpa.toString(), start_year: edu.start_year.toString(), end_year: edu.end_year?.toString() || '', is_current: edu.is_current }); setEduError(''); setEduModal(true); };
+  // Bug #7 fix: map backend fields (graduation_year, is_latest) → frontend form fields (end_year, is_current)
+  const openEditEdu = (edu: Education) => { setEditEdu(edu); setEduForm({ institution: edu.institution, degree: edu.degree, major: edu.major, gpa: edu.gpa?.toString() ?? '', start_year: '', end_year: edu.graduation_year?.toString() ?? '', is_current: edu.is_latest }); setEduError(''); setEduModal(true); };
 
   const handleEduSave = async (e: React.FormEvent) => {
     e.preventDefault(); setEduError(''); setEduSaving(true);
     try {
-      const payload = { ...eduForm, gpa: parseFloat(eduForm.gpa), start_year: parseInt(eduForm.start_year), end_year: eduForm.end_year ? parseInt(eduForm.end_year) : null };
+      // Bug #7 fix: map frontend field names → backend field names
+      const payload = {
+        institution:     eduForm.institution,
+        degree:          eduForm.degree,
+        major:           eduForm.major,
+        gpa:             parseFloat(eduForm.gpa),
+        gpa_scale:       4.0,
+        graduation_year: eduForm.is_current ? null : (eduForm.end_year ? parseInt(eduForm.end_year) : null),
+        is_latest:       eduForm.is_current,
+      };
       if (editEdu) await put(`/content/educations/${editEdu.id}`, payload);
       else await post('/content/educations', payload);
       setEduModal(false); fetchMe();
@@ -161,7 +173,8 @@ export default function ProfilePage() {
                       <div>
                         <p style={{ fontWeight: 700, color: textMain, fontSize: '0.875rem' }}>{edu.institution}</p>
                         <p style={{ fontSize: '0.8rem', color: textMut }}>{edu.degree} — {edu.major}</p>
-                        <p style={{ fontSize: '0.75rem', color: textMut, marginTop: '0.2rem' }}>IPK: <strong style={{ color: '#FF9B51' }}>{edu.gpa}</strong> · {edu.start_year} — {edu.is_current ? 'Sekarang' : edu.end_year}</p>
+                        {/* Bug #7 fix: pakai graduation_year & is_latest dari backend */}
+                        <p style={{ fontSize: '0.75rem', color: textMut, marginTop: '0.2rem' }}>IPK: <strong style={{ color: '#FF9B51' }}>{edu.gpa ?? '—'}</strong> · Lulus: {edu.is_latest ? 'Pendidikan Terakhir ✓' : (edu.graduation_year ?? '—')}</p>
                       </div>
                       <div style={{ display: 'flex', gap: '0.375rem' }}>
                         <button onClick={() => openEditEdu(edu)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: textMut, fontSize: '0.875rem' }}><i className="lni lni-pencil-1" /></button>
