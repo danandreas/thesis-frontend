@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import { get, post, put, del, getErrorMessage } from '@/lib/api';
@@ -142,96 +142,102 @@ export default function RecruitmentPage() {
           Belum ada rekrutmen.
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          {items.map(rec => {
-            const s = statusColor(rec.status);
-            return (
-              <div key={rec.id} style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', overflow: 'hidden', animation: 'fadeInUp 0.4s ease' }}>
-                {/* Header */}
-                <div style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', borderBottom: `1px solid ${border}` }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.375rem', flexWrap: 'wrap' }}>
-                      <span style={{ background: 'rgba(255,155,81,0.12)', color: '#FF7A1F', padding: '0.2rem 0.625rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>{rec.code}</span>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 700, background: s.bg, color: s.color }}>
-                        <i className={`lni ${s.icon}`} /> {rec.status.charAt(0).toUpperCase() + rec.status.slice(1)}
-                      </span>
-                      <span style={{ fontSize: '0.75rem', color: textMut }}>Bobot Asesmen: <strong style={{ color: '#FF9B51' }}>{rec.assessment_weight}%</strong></span>
-                    </div>
-                    <h3 style={{ fontWeight: 700, color: textMain, fontSize: '1rem', marginBottom: '0.25rem' }}>{rec.title}</h3>
-                    {rec.description && <p style={{ fontSize: '0.8rem', color: textMut, lineHeight: 1.5 }}>{rec.description}</p>}
-                  </div>
-                  <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', flexShrink: 0 }}>
-                    <Link href={`/dashboard/recruitment/${rec.id}`} style={{ padding: '0.5rem 0.875rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '8px', color: textMain, fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.375rem', fontWeight: 600 }}>
-                      <i className="lni lni-eye" /> Detail
-                    </Link>
-                    {rec.status === 'draft' && (
-                      <>
-                        <button onClick={() => handlePublish(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', color: '#10b981', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className={actionLoading === rec.id ? 'lni lni-spinner-3' : 'lni lni-play'} style={actionLoading === rec.id ? { animation: 'spin 1s linear infinite' } : {}} /> Publish
-                        </button>
-                        <button onClick={() => handleDelete(rec.id)} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                          <i className="lni lni-trash-3" /> Hapus
-                        </button>
-                      </>
-                    )}
-                    {rec.status === 'active' && (
-                      <button onClick={() => handleClose(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
-                        <i className="lni lni-locked-1" /> Tutup
-                      </button>
-                    )}
-                  </div>
-                </div>
-
-                {/* Positions summary */}
-                {rec.positions && rec.positions.length > 0 && (
-                  <div style={{ padding: '0.875rem 1.5rem', display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
-                    {rec.positions.map(pos => (
-                      <div key={pos.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: textMut, background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFC', padding: '0.375rem 0.75rem', borderRadius: '8px', border: `1px solid ${border}` }}>
-                        <i className="lni lni-briefcase-1" style={{ color: '#FF9B51' }} />
-                        <span style={{ fontWeight: 600, color: textMain }}>{pos.title}</span>
-                        <span>·</span>
-                        <span>{pos.applicant_count ?? 0}/{pos.quota} pelamar</span>
+        <>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+            {items.map(rec => {
+              const s = statusColor(rec.status);
+              return (
+                <div key={rec.id} style={{ background: surface, border: `1px solid ${border}`, borderRadius: '16px', overflow: 'hidden', animation: 'fadeInUp 0.4s ease' }}>
+                  {/* Header */}
+                  <div style={{ padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', borderBottom: `1px solid ${border}` }}>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.375rem', flexWrap: 'wrap' }}>
+                        <span style={{ background: 'rgba(255,155,81,0.12)', color: '#FF7A1F', padding: '0.2rem 0.625rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700 }}>{rec.code}</span>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25rem', padding: '0.2rem 0.625rem', borderRadius: '999px', fontSize: '0.7rem', fontWeight: 700, background: s.bg, color: s.color }}>
+                          <i className={`lni ${s.icon}`} /> {rec.status.charAt(0).toUpperCase() + rec.status.slice(1)}
+                        </span>
+                        <span style={{ fontSize: '0.75rem', color: textMut }}>Bobot Asesmen: <strong style={{ color: '#FF9B51' }}>{rec.assessment_weight}%</strong></span>
                       </div>
-                    ))}
+                      <h3 style={{ fontWeight: 700, color: textMain, fontSize: '1rem', marginBottom: '0.25rem' }}>{rec.title}</h3>
+                      {rec.description && <p style={{ fontSize: '0.8rem', color: textMut, lineHeight: 1.5 }}>{rec.description}</p>}
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', flexShrink: 0 }}>
+                      <Link href={`/dashboard/recruitment/${rec.id}`} style={{ padding: '0.5rem 0.875rem', background: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(37,52,63,0.06)', border: `1px solid ${border}`, borderRadius: '8px', color: textMain, fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.375rem', fontWeight: 600 }}>
+                        <i className="lni lni-eye" /> Detail
+                      </Link>
+                      {rec.status === 'draft' && (
+                        <>
+                          <button onClick={() => handlePublish(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '8px', color: '#10b981', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                            <i className={actionLoading === rec.id ? 'lni lni-spinner-3' : 'lni lni-play'} style={actionLoading === rec.id ? { animation: 'spin 1s linear infinite' } : {}} /> Publish
+                          </button>
+                          <button onClick={() => handleDelete(rec.id)} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                            <i className="lni lni-trash-3" /> Hapus
+                          </button>
+                        </>
+                      )}
+                      {rec.status === 'active' && (
+                        <button onClick={() => handleClose(rec.id)} disabled={actionLoading === rec.id} style={{ padding: '0.5rem 0.875rem', background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', borderRadius: '8px', color: '#ef4444', fontSize: '0.8rem', cursor: 'pointer', fontFamily: "'Montserrat', sans-serif", fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
+                          <i className="lni lni-locked-1" /> Tutup
+                        </button>
+                      )}
+                    </div>
                   </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
 
-        {/* Pagination controls */}
-        {totalPages > 1 && (
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
-            <button
-              onClick={() => fetchData(page - 1, search, filterStatus)}
-              disabled={page <= 1}
-              style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page <= 1 ? textMut : textMain, cursor: page <= 1 ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
-            >
-              <i className="lni lni-chevron-left" /> Prev
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 2).map((p, idx, arr) => (
-              <>
-                {idx > 0 && arr[idx - 1] !== p - 1 && <span key={`ellipsis-${p}`} style={{ color: textMut, fontSize: '0.8rem' }}>…</span>}
-                <button
-                  key={p}
-                  onClick={() => fetchData(p, search, filterStatus)}
-                  style={{ width: '36px', height: '36px', borderRadius: '8px', border: `1px solid ${p === page ? '#FF9B51' : border}`, background: p === page ? 'rgba(255,155,81,0.12)' : 'none', color: p === page ? '#FF9B51' : textMain, cursor: 'pointer', fontWeight: p === page ? 700 : 400, fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
-                >
-                  {p}
-                </button>
-              </>
-            ))}
-            <button
-              onClick={() => fetchData(page + 1, search, filterStatus)}
-              disabled={page >= totalPages}
-              style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page >= totalPages ? textMut : textMain, cursor: page >= totalPages ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
-            >
-              Next <i className="lni lni-chevron-right" />
-            </button>
+                  {/* Positions summary */}
+                  {rec.positions && rec.positions.length > 0 && (
+                    <div style={{ padding: '0.875rem 1.5rem', display: 'flex', gap: '0.875rem', flexWrap: 'wrap' }}>
+                      {rec.positions.map(pos => (
+                        <div key={pos.id} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: textMut, background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFC', padding: '0.375rem 0.75rem', borderRadius: '8px', border: `1px solid ${border}` }}>
+                          <i className="lni lni-briefcase-1" style={{ color: '#FF9B51' }} />
+                          <span style={{ fontWeight: 600, color: textMain }}>{pos.title}</span>
+                          <span>·</span>
+                          <span>{pos.applicant_count ?? 0}/{pos.quota} pelamar</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        )}
+
+          {/* Pagination controls */}
+          {totalPages > 1 && (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => fetchData(page - 1, search, filterStatus)}
+                disabled={page <= 1}
+                style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page <= 1 ? textMut : textMain, cursor: page <= 1 ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+              >
+                <i className="lni lni-chevron-left" /> Prev
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 2)
+                .map((p, idx, arr) => (
+                  <React.Fragment key={p}>
+                    {idx > 0 && arr[idx - 1] !== p - 1 && (
+                      <span style={{ color: textMut, fontSize: '0.8rem' }}>…</span>
+                    )}
+                    <button
+                      onClick={() => fetchData(p, search, filterStatus)}
+                      style={{ width: '36px', height: '36px', borderRadius: '8px', border: `1px solid ${p === page ? '#FF9B51' : border}`, background: p === page ? 'rgba(255,155,81,0.12)' : 'none', color: p === page ? '#FF9B51' : textMain, cursor: 'pointer', fontWeight: p === page ? 700 : 400, fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+                    >
+                      {p}
+                    </button>
+                  </React.Fragment>
+                ))}
+              <button
+                onClick={() => fetchData(page + 1, search, filterStatus)}
+                disabled={page >= totalPages}
+                style={{ padding: '0.5rem 0.875rem', background: 'none', border: `1px solid ${border}`, borderRadius: '8px', color: page >= totalPages ? textMut : textMain, cursor: page >= totalPages ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", fontSize: '0.8rem' }}
+              >
+                Next <i className="lni lni-chevron-right" />
+              </button>
+            </div>
+          )}
+        </>
       )}
+
 
       {/* Modal Buat Rekrutmen */}
       {showModal && (
