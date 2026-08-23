@@ -518,7 +518,7 @@ export default function UsersPage() {
                   gap: "0.5rem",
                 }}
               >
-                <i className="lni lni-info" /> {error}
+                <i className="lni lni-question-mark-circle" /> {error}
               </div>
             )}
             <form onSubmit={handleSave}>
