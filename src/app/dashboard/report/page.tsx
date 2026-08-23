@@ -5,8 +5,8 @@ import DashboardLayout from '@/components/layout/DashboardLayout';
 import { get, post, getErrorMessage } from '@/lib/api';
 import { useTheme } from '@/hooks/useTheme';
 
-interface Position { id: number; title: string; quota: number; recruitment_id: number; }
-interface Recruitment { id: number; title: string; status: string; positions: Position[]; }
+interface Position { id: number; title: string; quota: number; recruitment_id: number; recruitment_code: string; recruitment_title: string; }
+interface Recruitment { id: number; code: string; title: string; status: string; positions: Position[]; }
 interface RankingItem { application_id: number; candidate_name: string; candidate_email: string; rank_manual: number; rank_ml: number; final_score_manual: number; final_score_ml: number; is_recommended: boolean; admin_choice?: string; final_rank?: number; final_status?: string; }
 interface WeightComp { criteria_code: string; criteria_name: string; weight_manual: number; weight_ewm: number; weight_ml: number; difference: number; }
 
@@ -35,7 +35,7 @@ export default function ReportPage() {
         if (res.success && res.data) {
           const allPos = (res.data.items ?? [])
             .filter(r => ['active', 'closed'].includes(r.status))
-            .flatMap(r => (r.positions || []).map(p => ({ ...p, recruitment_id: r.id })));
+            .flatMap(r => (r.positions || []).map(p => ({ ...p, recruitment_id: r.id, recruitment_code: r.code, recruitment_title: r.title })));
           setPositions(allPos);
         }
       } catch { /* ignore */ }
@@ -89,7 +89,7 @@ export default function ReportPage() {
         <label style={{ fontSize: '0.8rem', fontWeight: 700, color: textMut, textTransform: 'uppercase', letterSpacing: '0.05em', flexShrink: 0 }}>Pilih Posisi:</label>
         <select value={selectedPos || ''} onChange={e => handleSelectPos(Number(e.target.value))} style={{ flex: 1, minWidth: '240px', padding: '0.625rem 0.875rem', background: isDark ? 'rgba(255,255,255,0.04)' : '#F8FAFC', border: `1.5px solid ${border}`, borderRadius: '10px', color: textMain, fontSize: '0.875rem', fontFamily: "'Montserrat', sans-serif", outline: 'none' }}>
           <option value="">-- Pilih posisi --</option>
-          {positions.map(p => <option key={p.id} value={p.id}>{p.title} (ID: {p.id})</option>)}
+          {positions.map(p => <option key={p.id} value={p.id}>{p.title} — {p.recruitment_code} · {p.recruitment_title}</option>)}
         </select>
         {selectedPos && (
           <button onClick={handleGenerate} disabled={generating} style={{ padding: '0.625rem 1.25rem', background: generating ? '#94a3b8' : '#25343F', border: 'none', borderRadius: '10px', color: 'white', fontWeight: 700, fontSize: '0.875rem', cursor: generating ? 'not-allowed' : 'pointer', fontFamily: "'Montserrat', sans-serif", display: 'flex', alignItems: 'center', gap: '0.5rem', whiteSpace: 'nowrap' }}>
