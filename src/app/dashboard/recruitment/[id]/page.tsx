@@ -194,17 +194,31 @@ export default function RecruitmentDetailPage() {
     setError("");
     setSaving(true);
     try {
-      const payload = {
-        ...reqForm,
+      const newItem = {
         requirement_type_id: parseInt(reqForm.requirement_type_id),
         weight: Number(reqForm.weight),
+        is_mandatory: reqForm.is_mandatory,
+        display_order: rec?.requirements?.length ?? 0,
       };
-      if (editReq)
+      if (editReq) {
+        // Edit: gunakan PUT ke endpoint individual
         await put(
           `/master/recruitments/${recId}/requirements/${editReq.id}`,
-          payload,
+          newItem,
         );
-      else await post(`/master/recruitments/${recId}/requirements`, payload);
+      } else {
+        // Tambah baru: backend requirement_setup adalah bulk endpoint
+        // → kirim seluruh list requirements (existing + baru)
+        const existing = (rec?.requirements ?? []).map((r) => ({
+          requirement_type_id: r.requirement_type_id,
+          weight: r.weight,
+          is_mandatory: r.is_mandatory,
+          display_order: r.id, // gunakan id sebagai display_order fallback
+        }));
+        await post(`/master/recruitments/${recId}/requirements`, {
+          requirements: [...existing, newItem],
+        });
+      }
       setModal(null);
       fetchData();
     } catch (err) {
