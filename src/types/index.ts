@@ -227,14 +227,20 @@ export interface RankingResult {
   application_id: number;
   candidate_name: string;
   candidate_email: string;
-  rank_manual: number;
-  rank_ml: number;
-  final_score_manual: number;
+  rank_manual?: number;              // legacy — bobot manual tidak lagi dihitung
+  rank_ml: number;                   // legacy = rank_a
+  rank_a?: number;                   // Lintasan A — Fuzzy-ELECTRE (bobot EWM-PSO)
+  rank_b?: number;                   // Lintasan B — Fuzzy-TOPSIS (bobot EWM-PSO)
+  skor_a?: number;                   // skor Lintasan A (min-max net ×100)
+  skor_b?: number;                   // skor Lintasan B (min-max closeness ×100)
+  closeness_b?: number;              // closeness coefficient Lintasan B
+  d_rank?: number;                   // displacement: rank_a − rank_b
+  final_score_manual?: number;
   final_score_ml: number;
   is_recommended: boolean;
-  admin_choice?: 'manual' | 'ml';
+  admin_choice?: 'manual' | 'ml';    // legacy HOTL
   final_rank?: number;
-  final_status?: 'accepted' | 'rejected' | 'pending';
+  final_status?: 'accepted' | 'rejected' | 'pending' | 'review';
 }
 
 export interface WeightComparison {
@@ -252,6 +258,10 @@ export interface GenerateResult {
   pso_converged: boolean;
   pso_iterations: number;
   spearman_correlation: number;
+  kendall_tau?: number;
+  rank_agreement?: boolean;
+  duration_a_ms?: number;
+  duration_b_ms?: number;
   ranking: RankingResult[];
   weight_comparison: WeightComparison[];
 }
